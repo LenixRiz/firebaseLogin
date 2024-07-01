@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FirebaseLogin</string>
+    <string-array name="program_studi_options">
+        <item>S1 Teknologi Informasi</item>
+        <item>S1 Sistem Informasi</item>
+        <item>D3 Sistem Infromasi</item>
+    </string-array>
 </resources>

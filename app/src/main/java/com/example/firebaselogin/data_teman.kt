@@ -1,6 +1,7 @@
 package com.example.firebaselogin
 
 class data_teman {
+    var program: String? = null
     var nama: String? = null
     var alamat: String? = null
     var no_hp: String? = null
@@ -8,10 +9,11 @@ class data_teman {
 
     constructor() {}
 
-    constructor(nama: String?, alamat: String?, no_hp: String?) {
+    constructor(nama: String?, alamat: String?, no_hp: String?, program: String?) {
         this.nama = nama
         this.alamat = alamat
         this.no_hp = no_hp
+        this.program = program
     }
 
 }

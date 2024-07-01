@@ -6,6 +6,8 @@ import android.text.TextUtils
 import android.text.TextUtils.isEmpty
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import com.example.firebaselogin.databinding.ActivityUpdateDataBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -18,7 +20,10 @@ class UpdateData : AppCompatActivity() {
     private var cekNama: String? = null
     private var cekAlamat: String? = null
     private var cekNoHP: String? = null
+
     private lateinit var binding: ActivityUpdateDataBinding
+    private lateinit var programStudiSpinner: Spinner
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUpdateDataBinding.inflate(layoutInflater)
@@ -29,6 +34,7 @@ class UpdateData : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
+        programStudiSpinner= findViewById(R.id.new_program)
         data
         binding.update.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
@@ -41,6 +47,8 @@ class UpdateData : AppCompatActivity() {
                         .show()
                 } else {
                     val setTeman = data_teman()
+                    val selectedProgramStudi = programStudiSpinner.selectedItem.toString()
+                    setTeman.program = selectedProgramStudi
                     setTeman.nama = binding.newNama.getText().toString()
                     setTeman.alamat = binding.newAlamat.getText().toString()
                     setTeman.no_hp = binding.newNohp.getText().toString()
@@ -59,6 +67,12 @@ class UpdateData : AppCompatActivity() {
             val getNama = intent.extras?.getString("dataNama")
             val getAlamat = intent.extras?.getString("dataAlamat")
             val getNoHP = intent.extras?.getString("dataNoHP")
+            val getProgramStudi = intent.extras?.getString("dataProgramStudi")
+            if (getProgramStudi != null) {
+                val adapter = programStudiSpinner.adapter
+                val position = (adapter as? ArrayAdapter<String>)?.getPosition(getProgramStudi) ?: 0
+                programStudiSpinner.setSelection(position)
+            }
             binding.newNama.setText(getNama)
             binding.newAlamat.setText(getAlamat)
             binding.newNohp.setText(getNoHP)

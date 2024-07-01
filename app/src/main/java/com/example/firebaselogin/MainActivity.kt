@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.widget.Spinner
 import android.widget.Toast
 import com.example.firebaselogin.LoginActivity
 import com.example.firebaselogin.MyListData
@@ -54,19 +55,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val getNama: String = binding.nama.getText().toString()
                 val getAlamat: String = binding.alamat.getText().toString()
                 val getNoHP: String = binding.noHp.getText().toString()
+                val spinner = findViewById<Spinner>(R.id.program)
+                val getProgram = spinner.selectedItem.toString()
 
                 //Mendapatkan Refrensi dari database
                 val getReference: DatabaseReference
                 getReference = database.reference
 
                 //mengecek apakah ada data yg kosong
-                if (isEmpty(getNama) || isEmpty(getAlamat) || isEmpty(getNoHP)) {
+                if (isEmpty(getNama) || isEmpty(getAlamat) || isEmpty(getNoHP) || isEmpty(getProgram)) {
                     Toast.makeText(this@MainActivity, "Data tidak boleh ada yang kosong",
                         Toast.LENGTH_SHORT).show()
                 } else {
                     //Jika teidak ada maka menyimpan ke database sesuai ID masing masing akun
                     getReference.child("Admin").child(getUserID).child("DataTeman").push()
-                        .setValue(data_teman(getNama, getAlamat, getNoHP))
+                        .setValue(data_teman(getNama, getAlamat, getNoHP, getProgram))
                         .addOnCompleteListener(this){
                             //bagian yg terjadi ketika user berhasil menyimpan data
                             binding.nama.setText("")

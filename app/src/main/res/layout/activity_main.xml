@@ -35,6 +35,18 @@
             android:ems="10"
             android:inputType="number" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Program Studi"
+            android:layout_marginTop="8dp"/>
+
+        <Spinner
+            android:id="@+id/program"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/program_studi_options"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

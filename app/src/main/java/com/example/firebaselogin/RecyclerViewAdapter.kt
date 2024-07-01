@@ -27,9 +27,10 @@ class RecyclerViewAdapter (private val dataTeman: ArrayList<data_teman>, context
 
     //view holder digunakan untuk menyimpan referensi dari view-view
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val  Nama: TextView
-        val  Alamat: TextView
-        val  NoHP: TextView
+        val Nama: TextView
+        val Alamat: TextView
+        val NoHP: TextView
+        val Program: TextView
         val ListItem: LinearLayout
 
         //menginisialisasi view yang terpasang pada layout Recycler View
@@ -37,6 +38,7 @@ class RecyclerViewAdapter (private val dataTeman: ArrayList<data_teman>, context
             Nama = itemView.findViewById(R.id.namax)
             Alamat = itemView.findViewById(R.id.alamatx)
             NoHP = itemView.findViewById(R.id.no_hpx)
+            Program = itemView.findViewById(R.id.programx)
             ListItem = itemView.findViewById(R.id.list_item)
         }
     }
@@ -54,11 +56,13 @@ class RecyclerViewAdapter (private val dataTeman: ArrayList<data_teman>, context
         val Nama: String? = dataTeman.get(position).nama
         val Alamat: String? = dataTeman.get(position).alamat
         val NoHP: String? = dataTeman.get(position).no_hp
+        val Program: String? = dataTeman.get(position).program
 
         //masukkan nilai atau value kedalam view
         holder.Nama.text = "Nama: $Nama"
         holder.Alamat.text = "Alamat: $Alamat"
         holder.NoHP.text = "NoHP: $NoHP"
+        holder.Program.text = "NoHP: $Program"
         holder.ListItem.setOnLongClickListener { view ->
             val action = arrayOf("Update", "Delete")
             val alert: AlertDialog.Builder = AlertDialog.Builder(view.context)
@@ -70,6 +74,7 @@ class RecyclerViewAdapter (private val dataTeman: ArrayList<data_teman>, context
                         bundle.putString("dataNama", dataTeman[position].nama)
                         bundle.putString("dataAlamat", dataTeman[position].alamat)
                         bundle.putString("dataNoHP", dataTeman[position].no_hp)
+                        bundle.putString("dataProgram", dataTeman[position].program)
                         bundle.putString("getPrimaryKey", dataTeman[position].key)
                         Log.e("RecyclerViewAdapter", "Navigating to UpdateData activity")
                         val intent = Intent(view.context.applicationContext, UpdateData::class.java)
